@@ -59,7 +59,7 @@ public class LoginWindow implements Initializable {
 
                     UserController.getInstance().loginUser(user.getUsername(), user.getPassword());
 
-                    Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
@@ -69,6 +69,10 @@ public class LoginWindow implements Initializable {
                 } else {
                     loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
                 }
+
+                Stage stage = (Stage)((Node) login.getSource()).getScene().getWindow();
+                stage.close();
+
             } catch (IOException e) {
                 System.out.println("[LOGIN BUTTON] " + e.toString());
             }

@@ -3,6 +3,7 @@ hu\alkfejl\App.class
 hu\alkfejl\controller\UserController.class
 hu\alkfejl\model\Room.class
 hu\alkfejl\dao\RoomDaoImpl.class
+hu\alkfejl\view\controller\HomePage.class
 hu\alkfejl\view\controller\RegistrationWindow.class
 hu\alkfejl\dao\UserDaoImpl.class
 hu\alkfejl\view\controller\LoginWindow.class
