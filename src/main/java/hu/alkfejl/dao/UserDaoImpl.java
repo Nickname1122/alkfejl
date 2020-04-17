@@ -16,8 +16,8 @@ public class UserDaoImpl implements UserDao {
     private static final String SEARCH_USER_NAME = "SELECT * FROM user WHERE username LIKE ?";
     private static final String SEARCH_USER_INTEREST = "SELECT * FROM user WHERE interest LIKE ?";
     private static final String LOGIN_USER = "SELECT username, password, status FROM user";
-    private static final String USED_USERNAME = "SELECT username FROM user WHERE username LIKE ?";
-    private static final String LOGGED_IN = "UPDATE user status = 1 where status = 0";
+    private static final String USED_USERNAME = "SELECT username FROM user";
+    private static final String LOGGED_IN = "UPDATE user SET status = 1 where status = 0";
 
 
     //constructor
@@ -44,8 +44,8 @@ public class UserDaoImpl implements UserDao {
             return pst.executeUpdate() == 1;
 
         } catch (SQLException e) {
-            //System.out.println("[ADD USER] " + e.toString());
-            e.printStackTrace();
+            System.out.println("[ADD USER] " + e.toString());
+            //e.printStackTrace();
         }
 
         return false;
@@ -118,13 +118,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean loginUser(String username, String password) {
-        try(Connection c = DriverManager.getConnection(CONN); Statement login = c.createStatement(); PreparedStatement status = c.prepareStatement(LOGGED_IN)){
+        try(Connection c = DriverManager.getConnection(CONN); Statement login = c.createStatement(); Statement status = c.createStatement()){
 
             ResultSet resultSet = login.executeQuery(LOGIN_USER);
 
             while(resultSet.next()){
                 if(username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password")) && resultSet.getInt("status") == 0) {
-                    status.executeUpdate();
+                    status.executeUpdate(LOGGED_IN);
                     return true;
                 }
             }
@@ -143,14 +143,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean usedUsername(String username) {
 
-        try(Connection c = DriverManager.getConnection(CONN); PreparedStatement preparedStatement = c.prepareStatement(USED_USERNAME)){
-            preparedStatement.setString(1, username);
+        try(Connection c = DriverManager.getConnection(CONN); Statement usedUsername = c.createStatement()){
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = usedUsername.executeQuery(USED_USERNAME);
 
-            if (resultSet != null){
-                return true;
+            while (resultSet.next()){
+                if(username.equals(resultSet.getString("username"))){
+                    return true;
+                }
             }
+
+            resultSet.close();
 
         }catch (SQLException e){
             System.out.println("[USED USERNAME] " + e.toString());

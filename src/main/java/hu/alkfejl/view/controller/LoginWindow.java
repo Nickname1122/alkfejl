@@ -51,37 +51,26 @@ public class LoginWindow implements Initializable {
 
         loginButton.setOnAction(login -> {
 
-            boolean notEmpty = false;
-
             user.setUsername(usernameTextField.getText());
             user.setPassword(String.valueOf(passwordField.getText()));
 
-            if(!(user.getUsername().equals("")) && !(user.getPassword().isEmpty())){
+            try {
+                if(!(user.getUsername().equals("")) && !(user.getPassword().isEmpty())){
 
-                notEmpty = true;
+                    UserController.getInstance().loginUser(user.getUsername(), user.getPassword());
 
-                if(notEmpty) {
-                    try {
-                        UserController.getInstance().loginUser(user.getUsername(), user.getPassword());
+                    Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.showAndWait();
 
-                        Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
-                        Stage stage = new Stage();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.showAndWait();
-
-                    } catch (IOException e) {
-                        System.out.println("[LOGIN BUTTON] " + e);
-                    }
                 } else {
-                    loginErrorLabel.setText("Rossz felhasználónév/jelszó!");
-                    loggedIn = false;
+                    loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
                 }
-            } else {
-                loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
-                notEmpty = false;
-                loggedIn = false;
+            } catch (IOException e) {
+                System.out.println("[LOGIN BUTTON] " + e.toString());
             }
         });
 

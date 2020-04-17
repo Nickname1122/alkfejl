@@ -71,9 +71,9 @@ public class RegistrationWindow implements Initializable {
 
             if(!(regUsernameField.getText().isEmpty())) {
                 user.setUsername(regUsernameField.getText());
-                //if (UserController.getInstance().usedUsername(user.getUsername())) {
-                    if (regPasswordField.getText().equals(regConfirmPasswordField.getText()) && !(regPasswordField.getText().isEmpty())) {
-                        user.setPassword(regPasswordField.getText());
+                if (!(UserController.getInstance().usedUsername(user.getUsername()))) {
+                    if (String.valueOf(regPasswordField.getText()).equals(String.valueOf(regConfirmPasswordField.getText())) && !(regPasswordField.getText().isEmpty())) {
+                        user.setPassword(String.valueOf(regPasswordField.getText()));
                     } else if (regPasswordField.getText().isEmpty()) {
                         registrationErrorLabel.setText("A jelszó nem lehet üres");
                     } else {
@@ -90,10 +90,9 @@ public class RegistrationWindow implements Initializable {
 
                     success = true;
 
-                //} else {
-                //    registrationErrorLabel.setText("A felhasználónév foglalt");
-                //}
-
+                } else {
+                    registrationErrorLabel.setText("A felhasználónév foglalt");
+                }
 
             }else{
                 registrationErrorLabel.setText("A felhasználónév nem lehet üres");
