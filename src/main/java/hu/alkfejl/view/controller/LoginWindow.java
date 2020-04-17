@@ -51,16 +51,18 @@ public class LoginWindow implements Initializable {
 
         loginButton.setOnAction(login -> {
 
+            boolean notEmpty = false;
+
             user.setUsername(usernameTextField.getText());
             user.setPassword(String.valueOf(passwordField.getText()));
 
-            if(!(user.getUsername().isEmpty()) && !(user.getPassword().isEmpty())){
+            if(!(user.getUsername().equals("")) && !(user.getPassword().isEmpty())){
+
                 notEmpty = true;
 
                 if(notEmpty) {
                     try {
                         UserController.getInstance().loginUser(user.getUsername(), user.getPassword());
-                        loggedIn = true;
 
                         Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
                         Stage stage = new Stage();

@@ -118,13 +118,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean loginUser(String username, String password) {
-        try(Connection c = DriverManager.getConnection(CONN); Statement statement = c.createStatement(); PreparedStatement logged_in = c.prepareStatement(LOGGED_IN)){
+        try(Connection c = DriverManager.getConnection(CONN); Statement login = c.createStatement(); PreparedStatement status = c.prepareStatement(LOGGED_IN)){
 
-            ResultSet resultSet = statement.executeQuery(LOGIN_USER);
+            ResultSet resultSet = login.executeQuery(LOGIN_USER);
 
             while(resultSet.next()){
                 if(username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password")) && resultSet.getInt("status") == 0) {
-                    logged_in.executeUpdate();
+                    status.executeUpdate();
                     return true;
                 }
             }
@@ -136,6 +136,7 @@ public class UserDaoImpl implements UserDao {
         }
 
         return false;
+
     }
 
 
