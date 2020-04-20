@@ -62,9 +62,9 @@ public class LoginWindow implements Initializable {
                         Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
                         Stage stage = (Stage)((Node) login.getSource()).getScene().getWindow();
                         Scene scene = new Scene(root);
+                        stage.setTitle("Home page");
                         stage.setScene(scene);
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.showAndWait();
+                        stage.show();
 
                     } else {
 

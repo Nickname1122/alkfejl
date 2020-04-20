@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,9 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomePage implements Initializable {
-
-    @FXML
-    private TableView<Room> roomTableView;
 
     @FXML
     private AnchorPane roomsAnchor;
@@ -42,7 +38,7 @@ public class HomePage implements Initializable {
     @FXML
     public void refreshTable(){
         List<Room> rooms = RoomController.getInstance().rooms();
-        roomTableView.setItems(FXCollections.observableList(rooms));
+        roomsTableView.setItems(FXCollections.observableList(rooms));
     }
 
     @FXML
@@ -51,11 +47,11 @@ public class HomePage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         List<Room> rooms = RoomController.getInstance().rooms();
-        roomTableView.setItems(FXCollections.observableList(rooms));
+        roomsTableView.setItems(FXCollections.observableList(rooms));
 
-        roomNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        roomNameColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
         roomCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        roomRuleColumn.setCellValueFactory(new PropertyValueFactory<>("rule"));
+        roomRuleColumn.setCellValueFactory(new PropertyValueFactory<>("rules"));
 
     }
 
