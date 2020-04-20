@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
     private static final String LIST_ALL_USER = "SELECT username FROM user";
     private static final String SEARCH_USER_NAME = "SELECT * FROM user WHERE username LIKE ?";
     private static final String SEARCH_USER_INTEREST = "SELECT * FROM user WHERE interest LIKE ?";
-    private static final String LOGIN_USER = "SELECT username, password, status FROM user";
+    private static final String LOGIN_USER = "SELECT username, password FROM user";
     private static final String USED_USERNAME = "SELECT username FROM user";
     private static final String LOGGED_IN = "UPDATE user SET status = 1 where status = 0";
 
@@ -123,7 +123,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = login.executeQuery(LOGIN_USER);
 
             while(resultSet.next()){
-                if(username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password")) && resultSet.getInt("status") == 0) {
+                if(username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password"))) {
                     status.executeUpdate(LOGGED_IN);
                     return true;
                 }

@@ -15,13 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 
 public class RegistrationWindow implements Initializable {
@@ -109,11 +104,6 @@ public class RegistrationWindow implements Initializable {
                 interestChoiceBox.getSelectionModel().select(0);
 
 
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    System.out.println("[SLEEPER] " + e.toString());
-                }
                 Stage stage = (Stage)((Node) pressed.getSource()).getScene().getWindow();
                 stage.close();
 

@@ -55,26 +55,30 @@ public class LoginWindow implements Initializable {
             user.setPassword(String.valueOf(passwordField.getText()));
 
             try {
-                if(!(user.getUsername().equals("")) && !(user.getPassword().isEmpty())){
+                if(!(user.getUsername().equals("")) && !(user.getPassword().equals(""))){
 
-                    UserController.getInstance().loginUser(user.getUsername(), user.getPassword());
+                    if (UserController.getInstance().loginUser(user.getUsername(), user.getPassword())) {
 
-                    Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.showAndWait();
+                        Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
+                        Stage stage = (Stage)((Node) login.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.showAndWait();
+
+                    } else {
+
+                        loginErrorLabel.setText("Rossz felhasználónév/jelszó!");
+
+                    }
 
                 } else {
                     loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
                 }
 
-                Stage stage = (Stage)((Node) login.getSource()).getScene().getWindow();
-                stage.close();
-
             } catch (IOException e) {
-                System.out.println("[LOGIN BUTTON] " + e.toString());
+//                System.out.println("[LOGIN BUTTON] " + e.toString());
+                e.printStackTrace();
             }
         });
 

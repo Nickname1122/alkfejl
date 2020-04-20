@@ -10,9 +10,9 @@ public class RoomDaoImpl implements RoomDao {
 
     private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/Chat App/src/main/resources/db/chat.db";
     private static final String ADD_ROOM = "INSERT INTO room (roomName, rules, category) VALUES (?,?,?)";
-    private static final String LIST_ALL_ROOM = "SELECT * FROM room";
-    private static final String SEARCH_ROOM_NAME = "SELECT * FROM room WHERE roomName LIKE ?";
-    private static final String SEARCH_ROOM_CATEGORY = "SELECT * FROM room WHERE category LIKE ?";
+    private static final String LIST_ALL_ROOM = "SELECT roomName, rules, category FROM room";
+    private static final String SEARCH_ROOM_NAME = "SELECT roomName, rules, category FROM room WHERE roomName LIKE ?";
+    private static final String SEARCH_ROOM_CATEGORY = "SELECT roomName, rules, category FROM room WHERE category LIKE ?";
 
     //constructor
     public RoomDaoImpl() {
@@ -56,7 +56,6 @@ public class RoomDaoImpl implements RoomDao {
             ResultSet resultSet = pst.executeQuery();
 
             while (resultSet.next()){
-                room.setRoomID(resultSet.getInt(Integer.parseInt("roomID")));
                 room.setRoomName(resultSet.getString("roomName"));
                 room.setRules(resultSet.getString("rules"));
                 room.setCategory(resultSet.getString("category"));
