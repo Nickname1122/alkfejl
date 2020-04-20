@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.view.controller.HomePage">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.view.controller.HomePage">
    <children>
       <Label fx:id="title" layoutX="253.0" layoutY="14.0" text="Chat App">
          <font>
@@ -23,13 +23,14 @@
             <content>
               <AnchorPane fx:id="roomsAnchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="roomsTableView" layoutX="200.0" layoutY="61.0" prefHeight="321.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="roomsTableView" layoutX="200.0" layoutY="60.0" prefHeight="284.0" prefWidth="600.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="roomNameColumn" prefWidth="146.0" text="Név" />
                             <TableColumn fx:id="roomCategoryColumn" prefWidth="154.0" text="Kategória" />
                               <TableColumn fx:id="roomRuleColumn" prefWidth="299.0" text="Szabályzat" />
                           </columns>
                         </TableView>
+                        <Button fx:id="refreshButton" layoutX="15.0" layoutY="290.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh" />
                      </children></AnchorPane>
             </content>
           </Tab>
