@@ -12,3 +12,12 @@ CREATE TABLE room(
     rules text NOT NULL,
     category text NOT NULL)
 ;
+
+CREATE TABLE conversation(
+    id integer PRIMARY KEY AUTOINCREMENT,
+    roomID integer NOT NULL,
+    sender text NOT NULL,
+    receiver text NOT NULL,
+    message text NOT NULL,
+    FOREIGN KEY (roomID) REFERENCES room(roomID)
+);
