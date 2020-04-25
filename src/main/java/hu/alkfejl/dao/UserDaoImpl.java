@@ -22,9 +22,9 @@ public class UserDaoImpl implements UserDao {
 
     //constructor
     public UserDaoImpl() {
-        try{
+        try {
             Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("[USER DAO IMPL CONSTRUCTOR] " + e.toString());
         }
 
@@ -60,11 +60,11 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         List<User> users = new ArrayList<>();
 
-        try (Connection c = DriverManager.getConnection(CONN); Statement st = c.createStatement()){
+        try (Connection c = DriverManager.getConnection(CONN); Statement st = c.createStatement()) {
 
             ResultSet resultSet = st.executeQuery(LIST_ALL_USER);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 user.setUsername(resultSet.getString("username"));
             }
 
@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         List<User> users = new ArrayList<>();
 
-        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_USER_NAME)){
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_USER_NAME)) {
 
             pst.setString(1, "%" + username + "%");
             listingUsers(user, users, pst);
@@ -103,9 +103,9 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         List<User> users = new ArrayList<>();
 
-        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_USER_INTEREST)){
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_USER_INTEREST)) {
 
-            pst.setString(1,  interest);
+            pst.setString(1, interest);
             listingUsers(user, users, pst);
 
         } catch (SQLException e) {
@@ -118,12 +118,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean loginUser(String username, String password) {
-        try(Connection c = DriverManager.getConnection(CONN); Statement login = c.createStatement(); Statement status = c.createStatement()){
+        try (Connection c = DriverManager.getConnection(CONN); Statement login = c.createStatement(); Statement status = c.createStatement()) {
 
             ResultSet resultSet = login.executeQuery(LOGIN_USER);
 
-            while(resultSet.next()){
-                if(username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password"))) {
+            while (resultSet.next()) {
+                if (username.equals(resultSet.getString("username")) && password.equals(resultSet.getString("password"))) {
                     status.executeUpdate(LOGGED_IN);
                     return true;
                 }
@@ -131,7 +131,7 @@ public class UserDaoImpl implements UserDao {
 
             resultSet.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("[LOGIN USER] " + e.toString());
         }
 
@@ -143,19 +143,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean usedUsername(String username) {
 
-        try(Connection c = DriverManager.getConnection(CONN); Statement usedUsername = c.createStatement()){
+        try (Connection c = DriverManager.getConnection(CONN); Statement usedUsername = c.createStatement()) {
 
             ResultSet resultSet = usedUsername.executeQuery(USED_USERNAME);
 
-            while (resultSet.next()){
-                if(username.equals(resultSet.getString("username"))){
+            while (resultSet.next()) {
+                if (username.equals(resultSet.getString("username"))) {
                     return true;
                 }
             }
 
             resultSet.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("[USED USERNAME] " + e.toString());
         }
 
@@ -167,7 +167,7 @@ public class UserDaoImpl implements UserDao {
     private void listingUsers(User user, List<User> users, PreparedStatement preparedStatement) throws SQLException {
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        while (resultSet.next()){
+        while (resultSet.next()) {
             user.setUsername(resultSet.getString("username"));
             user.setAge(resultSet.getInt(Integer.parseInt("age")));
             user.setInterest(resultSet.getString("interest"));

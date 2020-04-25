@@ -42,12 +42,12 @@ public class LoginWindow implements Initializable {
     private Label loginErrorLabel;
 
 
-    public LoginWindow(){
+    public LoginWindow() {
     }
 
 
     @FXML
-    public void submit(){
+    public void submit() {
 
         loginButton.setOnAction(login -> {
 
@@ -55,12 +55,12 @@ public class LoginWindow implements Initializable {
             user.setPassword(String.valueOf(passwordField.getText()));
 
             try {
-                if(!(user.getUsername().equals("")) && !(user.getPassword().equals(""))){
+                if (!(user.getUsername().equals("")) && !(user.getPassword().equals(""))) {
 
                     if (UserController.getInstance().loginUser(user.getUsername(), user.getPassword())) {
 
                         Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
-                        Stage stage = (Stage)((Node) login.getSource()).getScene().getWindow();
+                        Stage stage = (Stage) ((Node) login.getSource()).getScene().getWindow();
                         Scene scene = new Scene(root);
                         stage.setTitle("Home page");
                         stage.setScene(scene);
@@ -86,7 +86,7 @@ public class LoginWindow implements Initializable {
 
 
     @FXML
-    public void openRegistrationWindow(){
+    public void openRegistrationWindow() {
 
         registrationButton.setOnAction(reg -> {
 

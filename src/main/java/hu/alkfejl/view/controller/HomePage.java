@@ -36,16 +36,17 @@ public class HomePage implements Initializable {
     private Button refreshButton;
 
     @FXML
-    public void refreshTable(){
+    public void refreshTable() {
         List<Room> rooms = RoomController.getInstance().rooms();
         roomsTableView.setItems(FXCollections.observableList(rooms));
     }
 
     @FXML
-    public void search(){}
+    public void search() {
+    }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         List<Room> rooms = RoomController.getInstance().rooms();
         roomsTableView.setItems(FXCollections.observableList(rooms));
 
