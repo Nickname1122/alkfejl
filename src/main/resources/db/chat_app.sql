@@ -3,6 +3,7 @@ CREATE TABLE user(
     password text NOT NULL,
     age integer NOT NULL,
     interest text NOT NULL,
+    admin integer NOT NULL DEFAULT 0,
     status integer NOT NULL DEFAULT 0)
 ;
 
@@ -17,7 +18,6 @@ CREATE TABLE conversation(
     id integer PRIMARY KEY AUTOINCREMENT,
     roomID integer NOT NULL,
     sender text NOT NULL,
-    receiver text NOT NULL,
     message text NOT NULL,
     FOREIGN KEY (roomID) REFERENCES room(roomID)
 );
