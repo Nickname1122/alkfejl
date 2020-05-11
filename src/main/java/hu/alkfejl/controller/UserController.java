@@ -29,6 +29,10 @@ public class UserController {
         return userDao.loginUser(username, password);
     }
 
+    public boolean logoutUser(User user){
+        return userDao.logoutUser(user);
+    }
+
     public boolean usedUsername(String username){ return userDao.usedUsername(username); }
 
     public List<User> user(){

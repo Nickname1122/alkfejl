@@ -2,6 +2,7 @@ package hu.alkfejl.view.controller;
 
 import hu.alkfejl.controller.UserController;
 import hu.alkfejl.model.User;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,30 +30,43 @@ public class RegistrationWindow implements Initializable {
 
     @FXML
     private AnchorPane anchorPane;
+
     @FXML
     private GridPane gridPane;
+
     @FXML
     private Label regUsernameLabel;
+
     @FXML
     private Label regPasswordLabel;
+
     @FXML
     private Label regConfirmPasswordLabel;
+
     @FXML
     private Label ageLabel;
+
     @FXML
     private Label interestLabel;
+
     @FXML
     private TextField regUsernameField;
+
     @FXML
     private PasswordField regPasswordField;
+
     @FXML
     private PasswordField regConfirmPasswordField;
+
     @FXML
     private ChoiceBox<String> interestChoiceBox;
+
     @FXML
     private TextField ageField;
+
     @FXML
     private Button regRegistrationButton;
+
     @FXML
     private Label registrationErrorLabel;
 
@@ -64,7 +78,6 @@ public class RegistrationWindow implements Initializable {
     @FXML
     public void register() {
 
-        int age;
         boolean success = false;
 
         if (!(regUsernameField.getText().isEmpty())) {
@@ -77,26 +90,25 @@ public class RegistrationWindow implements Initializable {
                 } else {
                     registrationErrorLabel.setText("A két jelszó nem egyezik meg");
                 }
-                try {
-                    age = Integer.parseInt(ageField.getText());
-                    user.setAge(age);
-                } catch (NumberFormatException number) {
-                    registrationErrorLabel.setText("Az életkor csak szám lehet");
-                }
+
+                user.setAge(ageField.getText());
+                registrationErrorLabel.setText("Az életkor csak szám lehet");
 
                 user.setInterest(interestChoiceBox.getValue());
 
                 success = true;
-
             } else {
                 registrationErrorLabel.setText("A felhasználónév foglalt");
             }
+
 
         } else {
             registrationErrorLabel.setText("A felhasználónév nem lehet üres");
         }
 
+
         if (success) {
+
             UserController.getInstance().addUser(user);
             registrationErrorLabel.setText("Sikeres regisztráció");
 
@@ -113,17 +125,12 @@ public class RegistrationWindow implements Initializable {
                 stage.setTitle("Főoldal");
                 stage.setScene(scene);
                 stage.show();
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("[RIGISTRATION WINDOW] " + e.toString());
             }
 
-            Stage stage = (Stage) regRegistrationButton.getScene().getWindow();
-            stage.close();
-
         }
-
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -137,6 +144,5 @@ public class RegistrationWindow implements Initializable {
         interestChoiceBox.getSelectionModel().select(0);
 
     }
-
 
 }

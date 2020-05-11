@@ -6,14 +6,14 @@ public class User {
 
     private StringProperty username = new SimpleStringProperty();
     private StringProperty password = new SimpleStringProperty();
-    private IntegerProperty age = new SimpleIntegerProperty();
+    private StringProperty age = new SimpleStringProperty();
     private StringProperty interest = new SimpleStringProperty();
     private BooleanProperty status = new SimpleBooleanProperty();
 
     public User() {
     }
 
-    public User(String username, String password, int age, String interest, boolean status) {
+    public User(String username, String password, String age, String interest, boolean status) {
         this.username.set(username);
         this.password.set(password);
         this.age.set(age);
@@ -49,15 +49,15 @@ public class User {
         this.password.set(password);
     }
 
-    public int getAge() {
+    public String getAge() {
         return age.get();
     }
 
-    public IntegerProperty ageProperty() {
+    public StringProperty ageProperty() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age.set(age);
     }
 

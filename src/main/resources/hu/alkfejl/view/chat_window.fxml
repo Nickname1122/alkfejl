@@ -7,33 +7,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0"
-            prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="hu.alkfejl.view.controller.ChatWindow">
-   <TextField fx:id="messegesTextField" alignment="TOP_LEFT" layoutX="14.0" layoutY="526.0" prefHeight="181.0"
-              prefWidth="1042.0" promptText="Üzenet">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.view.controller.ChatWindow">
+   <TextField fx:id="messegesTextField" alignment="TOP_LEFT" layoutX="10.0" layoutY="526.0" maxHeight="180.0" maxWidth="1050.0" minHeight="180.0" minWidth="1050.0" prefHeight="180.0" prefWidth="1050.0" promptText="Üzenet">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </TextField>
-   <Button layoutX="1066.0" layoutY="525.0" maxHeight="181.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0"
-           mnemonicParsing="false" onAction="#sendMessage" prefHeight="181.0" prefWidth="200.0" text="Küldés">
+   <Button layoutX="1070.0" layoutY="525.0" maxHeight="180.0" maxWidth="200.0" minHeight="180.0" minWidth="200.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="180.0" prefWidth="200.0" text="Küldés">
       <font>
-         <Font size="31.0"/>
+         <Font size="31.0" />
       </font>
    </Button>
-   <TextArea fx:id="messagesTextArea" layoutX="12.0" layoutY="61.0" prefHeight="457.0" prefWidth="1254.0"/>
-   <Label fx:id="chatRoomNameLabel" alignment="CENTER" layoutX="172.0" layoutY="12.0" prefHeight="36.0"
-          prefWidth="1095.0">
+   <TextArea fx:id="messagesTextArea" layoutX="10.0" layoutY="61.0" maxHeight="460.0" maxWidth="1260.0" minHeight="460.0" minWidth="1260.0" prefHeight="460.0" prefWidth="1260.0" />
+   <Label fx:id="chatRoomNameLabel" alignment="CENTER" layoutX="190.0" layoutY="13.0" maxHeight="40.0" maxWidth="1080.0" minHeight="40.0" minWidth="1080.0" prefHeight="40.0" prefWidth="1080.0">
       <font>
-         <Font size="20.0"/>
+         <Font size="20.0" />
       </font>
    </Label>
-   <Button fx:id="backToHomepage" layoutX="12.0" layoutY="11.0" mnemonicParsing="false" onAction="#backToHomepage"
-           prefHeight="25.0" prefWidth="153.0" text="Főloldal">
+   <Button fx:id="homeButton" layoutX="10.0" layoutY="11.0" maxHeight="40.0" maxWidth="80.0" minHeight="40.0" minWidth="80.0" mnemonicParsing="false" onAction="#backToHomepage" prefHeight="40.0" prefWidth="80.0" text="Főloldal">
       <font>
-         <Font size="18.0"/>
+         <Font size="16.0" />
       </font>
    </Button>
+   <Button layoutX="100.0" layoutY="11.0" maxHeight="40.0" maxWidth="80.0" minHeight="40.0" minWidth="80.0" mnemonicParsing="false" onAction="#refresh" prefHeight="40.0" prefWidth="80.0" text="Frissítés">
+      <font>
+         <Font size="16.0" />
+      </font></Button>
 </AnchorPane>

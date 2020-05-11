@@ -8,9 +8,9 @@ import java.util.List;
 
 public class RoomDaoImpl implements RoomDao {
 
-    private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/Chat App/src/main/resources/db/chat.db";
+    private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/kotprog/chat-app-core/src/main/resources/db/chat.db";
     private static final String ADD_ROOM = "INSERT INTO room (roomName, rules, category) VALUES (?,?,?)";
-    private static final String LIST_ALL_ROOM = "SELECT roomName, rules, category FROM room";
+    private static final String LIST_ALL_ROOM = "SELECT * FROM room";
     private static final String SEARCH_ROOM_NAME = "SELECT roomName, rules, category FROM room WHERE roomName LIKE ?";
     private static final String SEARCH_ROOM_CATEGORY = "SELECT roomName, rules, category FROM room WHERE category LIKE ?";
 
@@ -50,19 +50,11 @@ public class RoomDaoImpl implements RoomDao {
 
         List<Room> rooms = new ArrayList<>();
 
-        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(LIST_ALL_ROOM)) {
+        try (Connection c = DriverManager.getConnection(CONN); Statement pst = c.createStatement()) {
 
-            ResultSet resultSet = pst.executeQuery();
+            ResultSet resultSet = pst.executeQuery(LIST_ALL_ROOM);
 
-            while (resultSet.next()) {
-                Room room = new Room();
-                room.setRoomName(resultSet.getString("roomName"));
-                room.setRules(resultSet.getString("rules"));
-                room.setCategory(resultSet.getString("category"));
-                rooms.add(room);
-            }
-
-            resultSet.close();
+            getRoomsData(rooms, resultSet);
 
 
         } catch (SQLException e) {
@@ -109,22 +101,43 @@ public class RoomDaoImpl implements RoomDao {
     }
 
 
-    //put the rooms into a result set
-    private void listingRooms(List<Room> rooms, PreparedStatement preparedStatement) throws SQLException {
-        ResultSet resultSet = preparedStatement.executeQuery();
+    private void getRoomsData(List<Room> rooms, ResultSet resultSet) {
 
-        while (resultSet.next()) {
-            Room room = new Room();
-            room.setRoomID(resultSet.getInt("roomID"));
-            room.setRoomName(resultSet.getString("roomName"));
-            room.setRules(resultSet.getString("rules"));
-            room.setCategory(resultSet.getString("category"));
-            rooms.add(room);
+        try {
+            while (resultSet.next()) {
+                Room room = new Room();
+                room.setRoomID(resultSet.getInt("roomID"));
+                room.setRoomName(resultSet.getString("roomName"));
+                room.setRules(resultSet.getString("rules"));
+                room.setCategory(resultSet.getString("category"));
+                rooms.add(room);
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            System.out.println("[GET ROOMS DATA] " + e.toString());
+            e.printStackTrace();
         }
-
-        resultSet.close();
 
     }
 
+
+    //put the rooms into a result set
+    private void listingRooms(List<Room> rooms, PreparedStatement preparedStatement) {
+
+        try {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            getRoomsData(rooms, resultSet);
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            System.out.println("[LISTING ROOMS] " + e.toString());
+//            e.printStackTrace();
+        }
+
+    }
 
 }

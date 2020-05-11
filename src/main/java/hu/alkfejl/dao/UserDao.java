@@ -10,6 +10,8 @@ public interface UserDao {
 
     boolean loginUser(String username, String password);
 
+    boolean logoutUser(User user);
+
     boolean usedUsername(String username);
 
     List<User> user();

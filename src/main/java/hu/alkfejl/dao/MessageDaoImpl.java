@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MessageDaoImpl implements MessageDao {
 
-    private static final String CONN = "jdbc:sqlite:chat.db";
+    private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/kotprog/chat-app-core/src/main/resources/db/chat.db";
     private static final String ADD_MESSAGE = "INSERT INTO messeges (roomID, sender, message) VALUES (?,?,?)";
     private static final String GET_MESSEGES = "SELECT * FROM messeges WHERE roomID = ?";
 

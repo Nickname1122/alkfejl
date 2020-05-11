@@ -22,27 +22,32 @@ import java.util.ResourceBundle;
 
 public class ChatWindow implements Initializable {
 
-    Room room = new Room();
-    User user = new User();
+    private Room room = new Room();
+    private User user = new User();
+    private Message message = new Message();
 
     @FXML
-    public TextField messegesTextField;
+    private TextField messegesTextField;
+
     @FXML
-    public TextArea messagesTextArea;
+    private TextArea messagesTextArea;
+
     @FXML
-    public Label chatRoomNameLabel;
+    private Label chatRoomNameLabel;
+
     @FXML
-    public Button backToHomepage;
+    private Button homeButton;
 
 
     @FXML
-    public void refresh(){
+    public void refresh() {
         List<Message> messeges = MessageController.getInstance().getMesseges(room.getRoomID());
 
-        for (Message message : messeges){
-            messagesTextArea.setText(message.getMessage() + " by: " + message.getSender() + "\n");
-        }
+        messagesTextArea.clear();
 
+        for (Message message : messeges){
+            messagesTextArea.appendText(message.getMessage() + " by: " + message.getSender() + "\n");
+        }
     }
 
 
@@ -55,14 +60,19 @@ public class ChatWindow implements Initializable {
         message.setMessage(messegesTextField.getText());
 
         MessageController.getInstance().addMessage(message);
+
+        messegesTextField.clear();
     }
 
 
     @FXML
     public void backToHomepage() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("hu/alkfejl/view/homepage.fxml"));
-            Stage stage = (Stage) backToHomepage.getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) homeButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Főoldal");
             stage.setScene(scene);
@@ -75,10 +85,11 @@ public class ChatWindow implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        room.roomNameProperty().bindBidirectional(chatRoomNameLabel.textProperty());
+        messagesTextArea.setEditable(false);
     }
 
-    public void initUser(User user){
+    public void initUser(User user) {
         user.copyTo(this.user);
     }
 

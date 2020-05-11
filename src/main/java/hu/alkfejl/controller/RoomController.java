@@ -11,15 +11,26 @@ public class RoomController {
     private RoomDao roomDao = new RoomDaoImpl();
     private static RoomController single_instance = null;
 
-    public RoomController(){}
+    public RoomController() {
+    }
 
-    public static RoomController getInstance(){
-        if(single_instance == null){
+    public static RoomController getInstance() {
+        if (single_instance == null) {
             single_instance = new RoomController();
         }
         return single_instance;
     }
 
-    public List<Room> rooms(){ return roomDao.room(); }
+    public List<Room> rooms() {
+        return roomDao.room();
+    }
+
+    public List<Room> searchRoomByName(String roomName) {
+        return roomDao.searchRoomByName(roomName);
+    }
+
+    public List<Room> searchRoomByCategory(String category) {
+        return roomDao.searchRoomByCategory(category);
+    }
 
 }

@@ -27,12 +27,16 @@ public class LoginWindow{
 
     @FXML
     private TextField usernameTextField;
+
     @FXML
     private PasswordField passwordField;
+
     @FXML
     private Button loginButton;
+
     @FXML
     private Button registrationButton;
+
     @FXML
     private Label loginErrorLabel;
 
@@ -56,7 +60,7 @@ public class LoginWindow{
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
                     Parent root = loader.load();
-                    ChatWindow controller = loader.getController();
+                    HomePage controller = loader.getController();
                     controller.initUser(user);
 
                     Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -85,7 +89,6 @@ public class LoginWindow{
 
     @FXML
     public void openRegistrationWindow() {
-
 
         try {
 
