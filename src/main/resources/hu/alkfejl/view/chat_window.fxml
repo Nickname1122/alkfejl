@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0"
+            prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="hu.alkfejl.view.controller.ChatWindow">
+   <TextField fx:id="messegesTextField" alignment="TOP_LEFT" layoutX="14.0" layoutY="526.0" prefHeight="181.0"
+              prefWidth="1042.0" promptText="Üzenet">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Button layoutX="1066.0" layoutY="525.0" maxHeight="181.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0"
+           mnemonicParsing="false" onAction="#sendMessage" prefHeight="181.0" prefWidth="200.0" text="Küldés">
+      <font>
+         <Font size="31.0"/>
+      </font>
+   </Button>
+   <TextArea fx:id="messagesTextArea" layoutX="12.0" layoutY="61.0" prefHeight="457.0" prefWidth="1254.0"/>
+   <Label fx:id="chatRoomNameLabel" alignment="CENTER" layoutX="172.0" layoutY="12.0" prefHeight="36.0"
+          prefWidth="1095.0">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Button fx:id="backToHomepage" layoutX="12.0" layoutY="11.0" mnemonicParsing="false" onAction="#backToHomepage"
+           prefHeight="25.0" prefWidth="153.0" text="Főloldal">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+</AnchorPane>

@@ -22,16 +22,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginWindow implements Initializable {
+public class LoginWindow{
 
-    private User user = new User();
 
-    @FXML
-    private Label usernameLabel;
     @FXML
     private TextField usernameTextField;
-    @FXML
-    private Label passwordLabel;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -48,39 +43,42 @@ public class LoginWindow implements Initializable {
 
     @FXML
     public void submit() {
+        User user = new User();
 
-        loginButton.setOnAction(login -> {
+        user.setUsername(usernameTextField.getText());
+        user.setPassword(String.valueOf(passwordField.getText()));
 
-            user.setUsername(usernameTextField.getText());
-            user.setPassword(String.valueOf(passwordField.getText()));
+        try {
+            if (!(user.getUsername().equals("")) && !(user.getPassword().equals(""))) {
 
-            try {
-                if (!(user.getUsername().equals("")) && !(user.getPassword().equals(""))) {
+                if (UserController.getInstance().loginUser(user.getUsername(), user.getPassword())) {
 
-                    if (UserController.getInstance().loginUser(user.getUsername(), user.getPassword())) {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
+                    Parent root = loader.load();
+                    ChatWindow controller = loader.getController();
+                    controller.initUser(user);
 
-                        Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
-                        Stage stage = (Stage) ((Node) login.getSource()).getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        stage.setTitle("Home page");
-                        stage.setScene(scene);
-                        stage.show();
-
-                    } else {
-
-                        loginErrorLabel.setText("Rossz felhasználónév/jelszó!");
-
-                    }
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("Főoldal");
+                    stage.setScene(scene);
+                    stage.show();
 
                 } else {
-                    loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
+
+                    loginErrorLabel.setText("Rossz felhasználónév/jelszó!");
+
                 }
 
-            } catch (IOException e) {
-//                System.out.println("[LOGIN BUTTON] " + e.toString());
-                e.printStackTrace();
+            } else {
+                loginErrorLabel.setText("Kérjük adja meg a felhasználónevet/jelszót!");
             }
-        });
+
+        } catch (IOException e) {
+            System.out.println("[LOGIN BUTTON] " + e.toString());
+//            e.printStackTrace();
+        }
 
     }
 
@@ -88,27 +86,21 @@ public class LoginWindow implements Initializable {
     @FXML
     public void openRegistrationWindow() {
 
-        registrationButton.setOnAction(reg -> {
 
-            try {
+        try {
 
-                Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.showAndWait();
+            Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/registration.fxml"));
+            Stage stage = (Stage) registrationButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Regisztráció");
+            stage.show();
 
-            } catch (IOException e) {
-                System.out.println("[REGISTRATION BUTTON] " + e);
-            }
+        } catch (IOException e) {
+            System.out.println("[REGISTRATION BUTTON] " + e);
+        }
 
-        });
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }

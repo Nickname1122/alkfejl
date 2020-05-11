@@ -21,6 +21,10 @@ public class User {
         this.status.set(status);
     }
 
+    public void copyTo(User user){
+        user.username.set(this.getUsername());
+    }
+
     public String getUsername() {
         return username.get();
     }

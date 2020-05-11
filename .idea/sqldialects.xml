@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/hu/alkfejl/dao/MessageDaoImpl.java" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/java/hu/alkfejl/dao/RoomDaoImpl.java" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/java/hu/alkfejl/dao/UserDaoImpl.java" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/chat_app.sql" dialect="SQLite" />

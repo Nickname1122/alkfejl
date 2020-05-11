@@ -14,7 +14,7 @@ CREATE TABLE room(
     category text NOT NULL)
 ;
 
-CREATE TABLE conversation(
+CREATE TABLE messeges(
     id integer PRIMARY KEY AUTOINCREMENT,
     roomID integer NOT NULL,
     sender text NOT NULL,

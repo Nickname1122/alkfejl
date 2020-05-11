@@ -20,7 +20,7 @@ public class App extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/login.fxml"));
             Scene scene = new Scene(root);
-            stage.setTitle("Chat APP");
+            stage.setTitle("Bejelentkezés");
             stage.setScene(scene);
             stage.show();
 

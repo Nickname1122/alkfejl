@@ -19,7 +19,7 @@ public class RoomDaoImpl implements RoomDao {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
-            System.out.println("[ROOM DAO IMPL CONSTRUCTOR] " + e);
+            System.out.println("[ROOM DAO IMPL CONSTRUCTOR] " + e.toString());
         }
     }
 
@@ -37,7 +37,7 @@ public class RoomDaoImpl implements RoomDao {
             return pst.executeUpdate() == 1;
 
         } catch (SQLException e) {
-            System.out.println("[ADD ROOM] " + e);
+            System.out.println("[ADD ROOM] " + e.toString());
         }
 
         return false;
@@ -48,7 +48,6 @@ public class RoomDaoImpl implements RoomDao {
     @Override
     public List<Room> room() {
 
-        Room room = new Room();
         List<Room> rooms = new ArrayList<>();
 
         try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(LIST_ALL_ROOM)) {
@@ -56,6 +55,7 @@ public class RoomDaoImpl implements RoomDao {
             ResultSet resultSet = pst.executeQuery();
 
             while (resultSet.next()) {
+                Room room = new Room();
                 room.setRoomName(resultSet.getString("roomName"));
                 room.setRules(resultSet.getString("rules"));
                 room.setCategory(resultSet.getString("category"));
@@ -66,7 +66,7 @@ public class RoomDaoImpl implements RoomDao {
 
 
         } catch (SQLException e) {
-            System.out.println("[LIST ALL ROOM] " + e);
+            System.out.println("[LIST ALL ROOM] " + e.toString());
         }
 
         return rooms;
@@ -76,17 +76,15 @@ public class RoomDaoImpl implements RoomDao {
     //Listing rooms by its names
     @Override
     public List<Room> searchRoomByName(String roomName) {
-        Room room = new Room();
         List<Room> rooms = new ArrayList<>();
 
         try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_ROOM_NAME)) {
 
             pst.setString(1, "%" + roomName + "%");
-            listingRooms(room, rooms, pst);
-            rooms.add(listingRooms(room, rooms, pst));
+            listingRooms(rooms, pst);
 
         } catch (SQLException e) {
-            System.out.println("[SEARCH ROOM BY NAME] " + e);
+            System.out.println("[SEARCH ROOM BY NAME] " + e.toString());
         }
 
         return rooms;
@@ -96,16 +94,15 @@ public class RoomDaoImpl implements RoomDao {
     //Listing rooms by its categories
     @Override
     public List<Room> searchRoomByCategory(String category) {
-        Room room = new Room();
         List<Room> rooms = new ArrayList<>();
 
         try (Connection c = DriverManager.getConnection(CONN); PreparedStatement pst = c.prepareStatement(SEARCH_ROOM_CATEGORY)) {
 
             pst.setString(1, category);
-            listingRooms(room, rooms, pst);
+            listingRooms(rooms, pst);
 
         } catch (SQLException e) {
-            System.out.println("[SEARCH ROOM BY CATEGORY] " + e);
+            System.out.println("[SEARCH ROOM BY CATEGORY] " + e.toString());
         }
 
         return rooms;
@@ -113,10 +110,11 @@ public class RoomDaoImpl implements RoomDao {
 
 
     //put the rooms into a result set
-    private Room listingRooms(Room room, List<Room> rooms, PreparedStatement preparedStatement) throws SQLException {
+    private void listingRooms(List<Room> rooms, PreparedStatement preparedStatement) throws SQLException {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
+            Room room = new Room();
             room.setRoomID(resultSet.getInt("roomID"));
             room.setRoomName(resultSet.getString("roomName"));
             room.setRules(resultSet.getString("rules"));
@@ -126,7 +124,6 @@ public class RoomDaoImpl implements RoomDao {
 
         resultSet.close();
 
-        return room;
     }
 
 
