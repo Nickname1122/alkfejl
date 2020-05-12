@@ -285,6 +285,11 @@ public class HomePage implements Initializable {
 
         });
 
+        //profil feltöltése
+        user.usernameProperty().bindBidirectional(profilUsernameLabel.textProperty());
+        user.interestProperty().bindBidirectional(profilInterestLabel.textProperty());
+        user.ageProperty().bindBidirectional(profilAgeLabel.textProperty());
+
     }
 
 

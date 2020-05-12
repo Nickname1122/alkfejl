@@ -25,6 +25,11 @@ public class User {
 
     public void copyTo(User user){
         user.username.set(this.getUsername());
+        user.password.set(this.getPassword());
+        user.age.set(this.getAge());
+        user.interest.set(this.getInterest());
+        user.status.set(this.isStatus());
+        user.admin.set(this.getAdmin());
     }
 
     public String getUsername() {

@@ -13,15 +13,15 @@
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0"
             prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="hu.alkfejl.view.controller.HomePage">
-    <Label fx:id="title" layoutX="594.0" layoutY="10.0" text="Chat App">
+    <Label layoutX="594.0" layoutY="10.0" text="Chat App">
         <font>
             <Font size="23.0"/>
         </font>
     </Label>
-    <TabPane fx:id="mainTabPane" layoutX="1.0" layoutY="50.0" maxHeight="670.0" maxWidth="1280.0" minHeight="670.0"
-             minWidth="1280.0" prefHeight="670.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
-        <Tab fx:id="rooms" text="Szobák">
-            <AnchorPane fx:id="roomsAnchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+    <TabPane layoutX="1.0" layoutY="50.0" maxHeight="670.0" maxWidth="1280.0" minHeight="670.0" minWidth="1280.0"
+             prefHeight="670.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Szobák">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <TableView fx:id="roomsTableView" layoutX="200.0" layoutY="60.0" maxHeight="285.0" maxWidth="600.0"
                            minHeight="285.0" minWidth="600.0" prefHeight="285.0" prefWidth="600.0"
                            AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -39,8 +39,8 @@
                 </TableView>
             </AnchorPane>
         </Tab>
-        <Tab fx:id="search" text="Szoba kereső név alapján">
-            <AnchorPane fx:id="searchAnchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <Tab text="Szoba kereső név alapján">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <TableView fx:id="searchTableView" layoutX="1.0" layoutY="50.0" maxHeight="670.0" maxWidth="1280.0"
                            minHeight="670.0" minWidth="1280.0" prefHeight="670.0" prefWidth="1280.0"
                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -58,12 +58,12 @@
                 </TableView>
                 <TextField fx:id="searchRoomNameField" layoutX="470.0" layoutY="14.0" prefHeight="25.0"
                            prefWidth="170.0" promptText="Szoba kereső"/>
-                <Button fx:id="searchRoomButtonName" layoutX="654.0" layoutY="14.0" mnemonicParsing="false"
-                        onAction="#searchRoomName" text="Keresés"/>
+                <Button layoutX="654.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchRoomName"
+                        text="Keresés"/>
             </AnchorPane>
         </Tab>
-        <Tab fx:id="search1" text="Szoba kereső kategória alapján">
-            <AnchorPane fx:id="searchAnchor1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <Tab text="Szoba kereső kategória alapján">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <TableView fx:id="searchTableView1" layoutX="1.0" layoutY="50.0" maxHeight="670.0" maxWidth="1280.0"
                            minHeight="670.0" minWidth="1280.0" prefHeight="670.0" prefWidth="1280.0"
                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -81,8 +81,8 @@
                 </TableView>
                 <TextField fx:id="searchRoomInterestField" layoutX="470.0" layoutY="14.0" prefHeight="25.0"
                            prefWidth="170.0" promptText="Szoba kereső"/>
-                <Button fx:id="searchRoomButtonInterest" layoutX="654.0" layoutY="14.0" mnemonicParsing="false"
-                        onAction="#searchRoomInterest" text="Keresés"/>
+                <Button layoutX="654.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchRoomInterest"
+                        text="Keresés"/>
             </AnchorPane>
         </Tab>
         <Tab text="Felhasználó kereső név alapján">
@@ -95,8 +95,8 @@
                         <TableColumn maxWidth="640.0" minWidth="640.0" prefWidth="640.0" text="Érdeklődési kör"/>
                     </columns>
                 </TableView>
-                <Button fx:id="searchUserButtonName" layoutX="653.0" layoutY="7.0" mnemonicParsing="false"
-                        onAction="#searchUserName" text="Keresés"/>
+                <Button layoutX="653.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchUserName"
+                        text="Keresés"/>
             </AnchorPane>
         </Tab>
         <Tab text="Felhasználó kereső érdeklődés alapján">
@@ -111,8 +111,8 @@
                                      prefWidth="640.0" text="Érdeklődési kör"/>
                     </columns>
                 </TableView>
-                <Button fx:id="searchUserButtonInterest" layoutX="653.0" layoutY="7.0" mnemonicParsing="false"
-                        onAction="#searchUserInterest" text="Keresés"/>
+                <Button layoutX="653.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchUserInterest"
+                        text="Keresés"/>
             </AnchorPane>
         </Tab>
         <Tab onSelectionChanged="#initializeProfile" text="Profil">
@@ -156,8 +156,7 @@
             </AnchorPane>
         </Tab>
     </TabPane>
-    <Button fx:id="refreshButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshTable"
-            text="Refresh"/>
+    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh"/>
     <Button fx:id="logoutButton" layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout"
             text="Kijelentkezés"/>
 </AnchorPane>

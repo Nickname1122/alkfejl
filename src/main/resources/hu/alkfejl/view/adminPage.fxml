@@ -9,43 +9,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.view.controller.AdminPage">
-   <children>
-      <Button fx:id="goToHome" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#goToHomePage" text="Főoldal" />
-      <Button layoutX="90.0" layoutY="20.0" mnemonicParsing="false" onAction="#refresh" text="Frissítés" />
-      <Button fx:id="logoutButton" layoutX="165.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" text="Kijelentkezés" />
-      <Label layoutX="569.0" layoutY="15.0" text="Admin felület">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="newRoom" layoutX="265.0" layoutY="20.0" mnemonicParsing="false" onAction="#createNewRoom" text="Új szoba" />
-      <TabPane layoutX="1.0" layoutY="70.0" maxHeight="650.0" maxWidth="1280.0" minHeight="650.0" minWidth="1280.0" prefHeight="650.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Felhasználók">
-               <content>
-                  <TableView fx:id="usersView" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="username" maxWidth="385.0" minWidth="385.0" prefWidth="385.0" text="Felhasználónév" />
-                      <TableColumn fx:id="interest" maxWidth="385.0" minWidth="385.0" prefWidth="385.0" text="Érdeklődési kör" />
-                        <TableColumn fx:id="age" maxWidth="385.0" minWidth="380.0" prefWidth="385.0" text="Életkor" />
-                        <TableColumn fx:id="deleteUser" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Törlés" />
-                    </columns>
-                  </TableView>
-               </content>
-            </Tab>
-            <Tab text="Szobák">
-               <content>
-                  <TableView fx:id="roomsView" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="roomName" maxWidth="385.0" minWidth="385.0" prefWidth="385.0" text="Szoba név" />
-                      <TableColumn fx:id="category" maxWidth="385.0" minWidth="385.0" prefWidth="385.0" text="Kategória" />
-                        <TableColumn fx:id="rules" maxWidth="385.0" minWidth="385.0" prefWidth="385.0" text="Szabályzat" />
-                        <TableColumn fx:id="deleteRoom" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Törlés" />
-                    </columns>
-                  </TableView>
-               </content></Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0"
+            prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="hu.alkfejl.view.controller.AdminPage">
+    <Button fx:id="goToHome" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#goToHomePage"
+            text="Főoldal"/>
+    <Button layoutX="90.0" layoutY="20.0" mnemonicParsing="false" onAction="#refresh" text="Frissítés"/>
+    <Button fx:id="logoutButton" layoutX="165.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout"
+            text="Kijelentkezés"/>
+    <Label layoutX="569.0" layoutY="15.0" text="Admin felület">
+        <font>
+          <Font size="24.0"/>
+        </font>
+    </Label>
+    <Button fx:id="newRoom" layoutX="265.0" layoutY="20.0" mnemonicParsing="false" onAction="#createNewRoom"
+            text="Új szoba"/>
+    <TabPane layoutX="1.0" layoutY="70.0" maxHeight="650.0" maxWidth="1280.0" minHeight="650.0" minWidth="1280.0"
+             prefHeight="650.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Felhasználók">
+            <TableView fx:id="usersView" prefHeight="200.0" prefWidth="200.0">
+                <columns>
+                    <TableColumn fx:id="username" maxWidth="385.0" minWidth="385.0" prefWidth="385.0"
+                                 text="Felhasználónév"/>
+                    <TableColumn fx:id="interest" maxWidth="385.0" minWidth="385.0" prefWidth="385.0"
+                                 text="Érdeklődési kör"/>
+                    <TableColumn fx:id="age" maxWidth="385.0" minWidth="380.0" prefWidth="385.0"
+                                 text="Életkor"/>
+                    <TableColumn fx:id="deleteUser" maxWidth="125.0" minWidth="125.0" prefWidth="125.0"
+                                 text="Törlés"/>
+                </columns>
+            </TableView>
+        </Tab>
+        <Tab text="Szobák">
+            <TableView fx:id="roomsView" prefHeight="200.0" prefWidth="200.0">
+                <columns>
+                    <TableColumn fx:id="roomName" maxWidth="385.0" minWidth="385.0" prefWidth="385.0"
+                                 text="Szoba név"/>
+                    <TableColumn fx:id="category" maxWidth="385.0" minWidth="385.0" prefWidth="385.0"
+                                 text="Kategória"/>
+                    <TableColumn fx:id="rules" maxWidth="385.0" minWidth="385.0" prefWidth="385.0"
+                                 text="Szabályzat"/>
+                    <TableColumn fx:id="deleteRoom" maxWidth="125.0" minWidth="125.0" prefWidth="125.0"
+                                 text="Törlés"/>
+                </columns>
+            </TableView>
+        </Tab>
+    </TabPane>
 </AnchorPane>
