@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class HomePage implements Initializable {
 
+
     private User user = new User();
 
     @FXML
@@ -58,10 +59,10 @@ public class HomePage implements Initializable {
     private TextField searchRoomInterestField;
 
     @FXML
-    private TableColumn<User, String> searchUsernameInterestColumn;
+    private TableColumn<User, String> SearchUserNameInterest;
 
     @FXML
-    private TableColumn<User, String> searchUserInterestInterestColumn;
+    private TableColumn<User, String> SearchUserInterestInterest;
 
     @FXML
     private TableView<User> searchUserInterestView;
@@ -97,6 +98,12 @@ public class HomePage implements Initializable {
     private TableColumn<Room, Void> enterToRoom;
 
     @FXML
+    private TableColumn<Room, Void> enterToRoomName;
+
+    @FXML
+    private TableColumn<Room, Void> enterToRoomInterest;
+
+    @FXML
     private Label profilUsernameLabel;
 
     @FXML
@@ -112,10 +119,9 @@ public class HomePage implements Initializable {
     @FXML
     public void initializeProfile() {
 
-        //initilize profile
-        user.usernameProperty().bindBidirectional(profilUsernameLabel.textProperty());
-        user.interestProperty().bindBidirectional(profilInterestLabel.textProperty());
-        user.ageProperty().bindBidirectional(profilAgeLabel.textProperty());
+//        newUser.usernameProperty().bindBidirectional(profilUsernameLabel.textProperty());
+//        newUser.interestProperty().bindBidirectional(profilInterestLabel.textProperty());
+//        newUser.ageProperty().bindBidirectional(profilAgeLabel.textProperty());
 
     }
 
@@ -155,20 +161,68 @@ public class HomePage implements Initializable {
         List<Room> rooms = RoomController.getInstance().searchRoomByName(searchRoomNameField.getText());
         searchTableView.setItems(FXCollections.observableList(rooms));
 
-        roomNameColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        roomCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        roomRuleColumn.setCellValueFactory(new PropertyValueFactory<>("rules"));
+        searchNameColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
+        searchCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        searchRuleTableColumn.setCellValueFactory(new PropertyValueFactory<>("rules"));
+
+        enterToRoomName.setCellFactory(actions -> new TableCell<>() {
+            private final Button enter = new Button("Belépés");
+
+            {
+                enter.setOnAction(event -> {
+                    Room room = getTableView().getItems().get(getIndex());
+                    enterRoom(user, room, (Stage) enter.getScene().getWindow());
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HBox container = new HBox();
+                    container.getChildren().addAll(enter);
+                    setGraphic(container);
+                }
+            }
+
+        });
     }
 
 
     @FXML
     public void searchRoomInterest() {
         List<Room> rooms = RoomController.getInstance().searchRoomByCategory(searchRoomInterestField.getText());
-        roomsTableView.setItems(FXCollections.observableList(rooms));
+        searchTableView1.setItems(FXCollections.observableList(rooms));
 
-        roomNameColumn.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        roomCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        roomRuleColumn.setCellValueFactory(new PropertyValueFactory<>("rules"));
+        searchNameColumn1.setCellValueFactory(new PropertyValueFactory<>("roomName"));
+        searchCategoryColumn1.setCellValueFactory(new PropertyValueFactory<>("category"));
+        searchRuleTableColumn1.setCellValueFactory(new PropertyValueFactory<>("rules"));
+
+        enterToRoomInterest.setCellFactory(actions -> new TableCell<>() {
+            private final Button enter = new Button("Belépés");
+
+            {
+                enter.setOnAction(event -> {
+                    Room room = getTableView().getItems().get(getIndex());
+                    enterRoom(user, room, (Stage) enter.getScene().getWindow());
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HBox container = new HBox();
+                    container.getChildren().addAll(enter);
+                    setGraphic(container);
+                }
+            }
+
+        });
     }
 
 
@@ -186,10 +240,10 @@ public class HomePage implements Initializable {
     @FXML
     public void searchUserInterest() {
         List<User> users = UserController.getInstance().searchUserByInterest(searchUserInterest.getText());
-        searchUserNameView.setItems(FXCollections.observableList(users));
+        searchUserInterestView.setItems(FXCollections.observableList(users));
 
-        searchUsernameNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        searchInterestNameColumn.setCellValueFactory(new PropertyValueFactory<>("interest"));
+        SearchUserNameInterest.setCellValueFactory(new PropertyValueFactory<>("username"));
+        SearchUserInterestInterest.setCellValueFactory(new PropertyValueFactory<>("interest"));
     }
 
 

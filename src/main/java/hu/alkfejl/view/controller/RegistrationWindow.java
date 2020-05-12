@@ -29,27 +29,6 @@ public class RegistrationWindow implements Initializable {
     private User user = new User();
 
     @FXML
-    private AnchorPane anchorPane;
-
-    @FXML
-    private GridPane gridPane;
-
-    @FXML
-    private Label regUsernameLabel;
-
-    @FXML
-    private Label regPasswordLabel;
-
-    @FXML
-    private Label regConfirmPasswordLabel;
-
-    @FXML
-    private Label ageLabel;
-
-    @FXML
-    private Label interestLabel;
-
-    @FXML
     private TextField regUsernameField;
 
     @FXML
@@ -92,7 +71,6 @@ public class RegistrationWindow implements Initializable {
                 }
 
                 user.setAge(ageField.getText());
-                registrationErrorLabel.setText("Az életkor csak szám lehet");
 
                 user.setInterest(interestChoiceBox.getValue());
 

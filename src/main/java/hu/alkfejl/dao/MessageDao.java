@@ -8,6 +8,10 @@ public interface MessageDao {
 
     boolean addMessage(Message message);
 
+    boolean deleteMessegesRoom(int roomID);
+
+    boolean deleteMessegesUser(String username);
+
     List<Message> getMesseges(int roomID);
 
 }

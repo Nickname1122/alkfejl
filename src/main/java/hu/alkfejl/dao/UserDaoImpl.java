@@ -12,13 +12,15 @@ public class UserDaoImpl implements UserDao {
 
     private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/kotprog/chat-app-core/src/main/resources/db/chat.db";
     private static final String ADD_USER = "INSERT INTO user (username, password, age, interest) VALUES (?,?,?,?)";
-    private static final String LIST_ALL_USER = "SELECT username FROM user";
+    private static final String GET_DATA = "SELECT * FROM user WHERE username = ?";
+    private static final String LIST_ALL_USER = "SELECT * FROM user";
     private static final String SEARCH_USER_NAME = "SELECT * FROM user WHERE username LIKE ?";
+    private static final String DELETE_USER = "DELETE FROM user WHERE username LIKE ?";
     private static final String SEARCH_USER_INTEREST = "SELECT * FROM user WHERE interest LIKE ?";
     private static final String LOGIN_USER = "SELECT username, password FROM user";
     private static final String USED_USERNAME = "SELECT username FROM user";
-    private static final String LOGGED_IN = "UPDATE user SET status = 1 where status = 0 AND username = ?";
-    private static final String LOGGED_OUT = "UPDATE user SET status = 0 where status = 1 AND username = ?";
+    private static final String LOGGED_IN = "UPDATE user SET status = 1 WHERE status = 0 AND username = ?";
+    private static final String LOGGED_OUT = "UPDATE user SET status = 0 WHERE status = 1 AND username = ?";
 
 
     //constructor
@@ -54,6 +56,24 @@ public class UserDaoImpl implements UserDao {
     }
 
 
+    @Override
+    public boolean deleteUser(User user) {
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement deleteUser = c.prepareStatement(DELETE_USER)) {
+
+            deleteUser.setString(1, user.getUsername());
+
+            return deleteUser.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            System.out.println("[DELETE USER] " + e.toString());
+//            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+
     //Listing all user (not sure for its need)
     @Override
     public List<User> user() {
@@ -67,6 +87,8 @@ public class UserDaoImpl implements UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setUsername(resultSet.getString("username"));
+                user.setAge(resultSet.getString("age"));
+                user.setInterest(resultSet.getString("interest"));
                 users.add(user);
             }
 
@@ -160,6 +182,7 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+
     @Override
     public boolean usedUsername(String username) {
 
@@ -180,6 +203,34 @@ public class UserDaoImpl implements UserDao {
         }
 
         return false;
+    }
+
+
+    @Override
+    public User getData(String username) {
+
+        User user = new User();
+
+        try(Connection c = DriverManager.getConnection(CONN); PreparedStatement getData = c.prepareStatement(GET_DATA)){
+
+            getData.setString(1, username);
+
+            ResultSet resultSet = getData.executeQuery();
+
+            while (resultSet.next()){
+                user.setUsername(resultSet.getString("username"));
+                user.setInterest(resultSet.getString("interest"));
+                user.setAdmin(resultSet.getInt("admin"));
+                user.setAge(resultSet.getString("age"));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            System.out.println("[GET DATA] " + e.toString());
+        }
+
+        return user;
     }
 
 

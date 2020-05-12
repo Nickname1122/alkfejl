@@ -18,7 +18,10 @@
          <Font size="31.0" />
       </font>
    </Button>
-   <TextArea fx:id="messagesTextArea" layoutX="10.0" layoutY="61.0" maxHeight="460.0" maxWidth="1260.0" minHeight="460.0" minWidth="1260.0" prefHeight="460.0" prefWidth="1260.0" />
+   <TextArea fx:id="messagesTextArea" layoutX="10.0" layoutY="61.0" maxHeight="460.0" maxWidth="1260.0" minHeight="460.0" minWidth="1260.0" prefHeight="460.0" prefWidth="1260.0">
+      <font>
+         <Font size="20.0" />
+      </font></TextArea>
    <Label fx:id="chatRoomNameLabel" alignment="CENTER" layoutX="190.0" layoutY="13.0" maxHeight="40.0" maxWidth="1080.0" minHeight="40.0" minWidth="1080.0" prefHeight="40.0" prefWidth="1080.0">
       <font>
          <Font size="20.0" />

@@ -21,6 +21,14 @@ public class RoomController {
         return single_instance;
     }
 
+    public boolean addRoom(Room room){
+        return roomDao.addRoom(room);
+    }
+
+    public void deleteRoom(Room room){
+        roomDao.deleteRoom(room);
+    }
+
     public List<Room> rooms() {
         return roomDao.room();
     }

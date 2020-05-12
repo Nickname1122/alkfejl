@@ -7,7 +7,7 @@ public interface RoomDao {
 
     boolean addRoom(Room room);
 
-
+    boolean deleteRoom(Room room);
 
     List<Room> room();
 

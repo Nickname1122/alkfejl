@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.view.controller.Choice">
+   <children>
+      <Button fx:id="goToAdmin" layoutX="109.0" layoutY="188.0" mnemonicParsing="false" onAction="#goToAdminPage" text="Admin felület">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="goToHome" layoutX="385.0" layoutY="188.0" mnemonicParsing="false" onAction="#goToHomePage" text="Főoldal">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="174.0" layoutY="69.0" text="Hova szeretnél belépni?">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

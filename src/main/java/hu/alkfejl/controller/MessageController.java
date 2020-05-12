@@ -23,8 +23,18 @@ public class MessageController {
     }
 
 
-    public boolean addMessage(Message message) {
-        return messageDao.addMessage(message);
+    public void addMessage(Message message) {
+        messageDao.addMessage(message);
+    }
+
+
+    public void deleteMessegesRoom(int roomID) {
+        messageDao.deleteMessegesRoom(roomID);
+    }
+
+
+    public void deleteMessegesUser(String username) {
+        messageDao.deleteMessegesUser(username);
     }
 
 

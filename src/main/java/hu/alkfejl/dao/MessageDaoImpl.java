@@ -11,6 +11,9 @@ public class MessageDaoImpl implements MessageDao {
     private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/kotprog/chat-app-core/src/main/resources/db/chat.db";
     private static final String ADD_MESSAGE = "INSERT INTO messeges (roomID, sender, message) VALUES (?,?,?)";
     private static final String GET_MESSEGES = "SELECT * FROM messeges WHERE roomID = ?";
+    private static final String DELETE_MESSEGES_ROOM = "DELETE FROM messeges WHERE roomID = ?";
+    private static final String DELETE_MESSEGES_USER = "DELETE FROM messeges WHERE sender = ?";
+
 
     public MessageDaoImpl() {
         try {
@@ -34,20 +37,56 @@ public class MessageDaoImpl implements MessageDao {
         }
 
         return false;
+
     }
 
+
     @Override
-    public List<Message> getMesseges(int roomID){
+    public boolean deleteMessegesRoom(int roomID) {
+
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement deleteMesseges = c.prepareStatement(DELETE_MESSEGES_ROOM)) {
+
+            deleteMesseges.setInt(1, roomID);
+
+            return deleteMesseges.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            System.out.println("[DELETE MESSEGES ROOM] " + e.toString());
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean deleteMessegesUser(String username) {
+
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement deleteMesseges = c.prepareStatement(DELETE_MESSEGES_USER)) {
+
+            deleteMesseges.setString(1, username);
+
+            return deleteMesseges.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            System.out.println("[DELETE MESSEGES USER] " + e.toString());
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public List<Message> getMesseges(int roomID) {
 
         List<Message> result = new ArrayList<>();
 
-        try(Connection c = DriverManager.getConnection(CONN); PreparedStatement getMesseges = c.prepareStatement(GET_MESSEGES)){
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement getMesseges = c.prepareStatement(GET_MESSEGES)) {
 
             getMesseges.setInt(1, roomID);
 
             ResultSet resultSet = getMesseges.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Message message = new Message();
                 message.setMessage(resultSet.getString("message"));
                 message.setSender(resultSet.getString("sender"));
@@ -58,7 +97,7 @@ public class MessageDaoImpl implements MessageDao {
 
             resultSet.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("[GET MESSEGES] " + e.toString());
         }
 

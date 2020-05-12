@@ -22,8 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginWindow{
+public class LoginWindow {
 
+    private User user = new User();
 
     @FXML
     private TextField usernameTextField;
@@ -57,18 +58,34 @@ public class LoginWindow{
 
                 if (UserController.getInstance().loginUser(user.getUsername(), user.getPassword())) {
 
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
-                    Parent root = loader.load();
-                    HomePage controller = loader.getController();
-                    controller.initUser(user);
+                    if (UserController.getInstance().getData(user.getUsername()).getAdmin() == 1) {
 
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setTitle("Főoldal");
-                    stage.setScene(scene);
-                    stage.show();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/hu/alkfejl/view/admin_page.fxml"));
+                        Parent root = loader.load();
+                        Choice controller = loader.getController();
+                        controller.initUser(user);
 
+                        Stage stage = (Stage) loginButton.getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Admin felület");
+                        stage.show();
+
+                    } else {
+
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
+                        Parent root = loader.load();
+                        HomePage controller = loader.getController();
+                        controller.initUser(user);
+
+                        Stage stage = (Stage) loginButton.getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Főoldal");
+                        stage.setScene(scene);
+                        stage.show();
+                    }
                 } else {
 
                     loginErrorLabel.setText("Rossz felhasználónév/jelszó!");
@@ -105,5 +122,10 @@ public class LoginWindow{
 
 
     }
+
+    public void initUser(User user) {
+        user.copyTo(this.user);
+    }
+
 
 }

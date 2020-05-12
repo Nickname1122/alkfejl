@@ -11,8 +11,10 @@ public class RoomDaoImpl implements RoomDao {
     private static final String CONN = "jdbc:sqlite:C:/Users/Levente/OneDrive/Documents/Egyetem/4. félév/Alk/kotprog/chat-app-core/src/main/resources/db/chat.db";
     private static final String ADD_ROOM = "INSERT INTO room (roomName, rules, category) VALUES (?,?,?)";
     private static final String LIST_ALL_ROOM = "SELECT * FROM room";
-    private static final String SEARCH_ROOM_NAME = "SELECT roomName, rules, category FROM room WHERE roomName LIKE ?";
-    private static final String SEARCH_ROOM_CATEGORY = "SELECT roomName, rules, category FROM room WHERE category LIKE ?";
+    private static final String SEARCH_ROOM_NAME = "SELECT roomID, roomName, rules, category FROM room WHERE roomName LIKE ?";
+    private static final String SEARCH_ROOM_CATEGORY = "SELECT roomID, roomName, rules, category FROM room WHERE category LIKE ?";
+    private static final String DELETE_ROOM = "DELETE FROM room WHERE roomID = ?";
+
 
     //constructor
     public RoomDaoImpl() {
@@ -100,6 +102,23 @@ public class RoomDaoImpl implements RoomDao {
         return rooms;
     }
 
+
+    @Override
+    public boolean deleteRoom(Room room) {
+
+        try (Connection c = DriverManager.getConnection(CONN); PreparedStatement deleteRoom = c.prepareStatement(DELETE_ROOM)){
+
+            deleteRoom.setInt(1, room.getRoomID());
+
+            return deleteRoom.executeUpdate() == 1;
+
+        } catch (SQLException e){
+//            System.out.println("[DELETE ROOM] " + e.toString());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     private void getRoomsData(List<Room> rooms, ResultSet resultSet) {
 

@@ -8,11 +8,15 @@ public interface UserDao {
 
     boolean addUser(User user);
 
+    boolean deleteUser(User user);
+
     boolean loginUser(String username, String password);
 
     boolean logoutUser(User user);
 
     boolean usedUsername(String username);
+
+    User getData(String username);
 
     List<User> user();
 

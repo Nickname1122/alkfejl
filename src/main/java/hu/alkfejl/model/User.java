@@ -9,16 +9,18 @@ public class User {
     private StringProperty age = new SimpleStringProperty();
     private StringProperty interest = new SimpleStringProperty();
     private BooleanProperty status = new SimpleBooleanProperty();
+    private IntegerProperty admin = new SimpleIntegerProperty();
 
     public User() {
     }
 
-    public User(String username, String password, String age, String interest, boolean status) {
+    public User(String username, String password, String age, String interest, boolean status, int admin) {
         this.username.set(username);
         this.password.set(password);
         this.age.set(age);
         this.interest.set(interest);
         this.status.set(status);
+        this.admin.set(admin);
     }
 
     public void copyTo(User user){
@@ -83,5 +85,17 @@ public class User {
 
     public void setStatus(boolean status) {
         this.status.set(status);
+    }
+
+    public int getAdmin() {
+        return admin.get();
+    }
+
+    public IntegerProperty adminProperty() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin.set(admin);
     }
 }

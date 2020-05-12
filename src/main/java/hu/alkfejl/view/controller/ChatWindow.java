@@ -24,7 +24,6 @@ public class ChatWindow implements Initializable {
 
     private Room room = new Room();
     private User user = new User();
-    private Message message = new Message();
 
     @FXML
     private TextField messegesTextField;
@@ -68,10 +67,7 @@ public class ChatWindow implements Initializable {
     @FXML
     public void backToHomepage() {
         try {
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
-            Parent root = loader.load();
+            Parent root = FXMLLoader.load(getClass().getResource("/hu/alkfejl/view/homepage.fxml"));
             Stage stage = (Stage) homeButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("Főoldal");
